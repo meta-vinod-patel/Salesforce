@@ -1,0 +1,146 @@
+<apex:page controller="purchaseOrderController" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" language="en-US" applyHTMLTag="false">
+    <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <title>ShopCart</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+        </head>
+        <body>
+            <nav class="navbar sticky-top navbar-dark bg-primary justify-content-center">
+                <a class="navbar-brand " href="#">STICKY SHOP</a>
+            </nav>
+            <apex:pageBlock >
+                <apex:pageBlock rendered="{!showCart}">
+                    <apex:form >
+                        <apex:pageBlockTable value="{!allProductInOrg}" var="vfProduct" rows="7" id="orgProducts" styleClass="table table-striped table-light" >
+                            <apex:column >
+                                <apex:inputCheckbox value="{!vfProduct.isSelected}" id="checkBox">
+                                    <apex:actionSupport event="onchange" action="{!processWithSelected}" reRender="cart,orgProducts">
+                                        <apex:param name="selectedProductId" assignTo="{!selectedProductID}" value="{!vfProduct.product.Id}"/>
+                                    </apex:actionSupport>
+                                </apex:inputCheckbox>
+                            </apex:column>
+                            <apex:column styleClass="col">
+                                <apex:facet name="header">
+                                    Name
+                                </apex:facet>
+                                <apex:outputText value="{!vfProduct.product.Name}"/>
+                            </apex:column>
+                            <apex:column styleClass="col">
+                                <apex:facet name="header">
+                                    Product Code
+                                </apex:facet>
+                                <apex:outputText value="{!vfProduct.product.ProductCode}"/>
+                            </apex:column>
+                            <apex:column styleClass="col">
+                                <apex:facet name="header">
+                                    Price
+                                </apex:facet>
+                                <apex:outputText value="{!vfProduct.product.Price__c}"/>
+                            </apex:column>
+                            <apex:column styleClass="col">
+                                <apex:facet name="header">
+                                    Quantity
+                                </apex:facet>
+                                <apex:outputText value="{!vfProduct.product.Quantity__c}"/>
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:form>
+                </apex:pageBlock>
+                
+                <nav class="navbar sticky-top navbar-dark bg-primary justify-content-center">
+                    <a class="navbar-brand " href="#">Your Cart</a>
+                </nav>
+                <apex:form >
+                    <apex:pageBlock rendered="{!showCart}">
+                        <apex:outputPanel id="cart">
+                            <apex:pageBlockTable value="{!selectedProductList}" var="selectedProduct" rendered="{!!showCartMessage}" styleClass="table table-bordered table-light" >
+                                <apex:column value="{!selectedProduct.product.Name}"/>
+                                <apex:column value="{!selectedProduct.product.Price__c}" id="productPrice"/>
+                                <apex:column >
+                                    <apex:facet name="header">
+                                        Total Quantity
+                                    </apex:facet>
+                                    <apex:outputField value="{!selectedProduct.MyProduct.Quantity__c}" id="newQuantity" >
+                                        <apex:inlineEditSupport event="ondblClick" showOnEdit="saveButton,cancelButton" /> 
+                                    </apex:outputField>                     
+                                </apex:column>
+                                <apex:column >
+                                    <apex:facet name="header">
+                                        Amount
+                                    </apex:facet>
+                                    {!selectedProduct.amount}
+                                </apex:column>
+                                <apex:column >
+                                    <apex:facet name="header">
+                                        Action
+                                    </apex:facet>
+                                    <apex:commandLink action="{!remove}" reRender="cart,orgProducts">
+                                        <img src="/img/func_icons/remove12_on.gif"/>
+                                        <apex:param name="productId" value="{!selectedProduct.product.Id}" assignTo="{!removeProductId}"/>
+                                    </apex:commandLink>
+                                </apex:column>
+                                
+                            </apex:pageBlockTable>
+                            
+                            <apex:outputText rendered="{!!showCartMessage}">
+                                Your cart Total : <b>{!cartTotal}/-</b>&nbsp;&nbsp; 
+                                <apex:commandButton value="CheckOut" action="{!showUser}" styleClass="btn btn-success btn-lg btn-block" />
+                                <!--onclick="window.open('/apex/createUser','_blank','height=200,width=600');" -->
+                            </apex:outputText>
+                            <apex:outputText rendered="{!showCartMessage}">
+                                <nav class="navbar sticky-top navbar-dark bg-info justify-content-center" style="opacity:0.6;">
+                                    <a class="navbar-brand " href="#">Your Cart Is Empty.</a>
+                                </nav>
+                            </apex:outputText>
+                        </apex:outputPanel>
+                    </apex:pageBlock>
+                </apex:form>
+            </apex:pageBlock>
+            <apex:form >
+                <apex:pageBlock rendered="{!showUserForm}">
+                    <nav class="navbar sticky-top navbar-dark bg-warning justify-content-center">
+                        <a class="navbar-brand " href="#">Enter UserInfo For Checkout.</a>
+                    </nav>
+                    <div class="container" style="padding-top:100px;">
+                        <apex:pageMessages />
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">UserName:</label>
+                            <div class="col-sm-12">
+                                <apex:inputField required="true" value="{!userAccount.Name}" styleClass="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email" >Email:</label>
+                            <div class="col-sm-12">
+                                <apex:inputField required="true" value="{!userAccount.Email__c}" styleClass="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" >Address:</label>
+                            <div class="col-sm-12">
+                                <apex:inputField required="true" value="{!userAccount.Address__c}" styleClass="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <apex:commandButton value="Save" action="{!save}" styleClass="btn btn-lg btn-outline-success btn-block" />
+                            <apex:commandButton value="cancel" action="{!cancel}" styleClass="btn btn-outline-danger btn-lg btn-block" />
+                        </div>
+                    </div>
+                </apex:pageBlock>
+            </apex:form>
+            <apex:pageBlock rendered="{!orderPurchased}">
+                <apex:form >
+                    <div class="container">
+                        <nav class="navbar sticky-top navbar-dark bg-info justify-content-center" style="opacity:0.5;">
+                            <a class="navbar-brand " href="#">Thank you for shopping with us your order will be deliver soon. We will notify you with E-mail.</a>
+                        </nav>
+                        <apex:commandButton action="/{!userAccount.Id}" value="View Purchased" styleClass="btn btn-lg btn-outline-success btn-block"/>
+                        <apex:commandButton value="Buy More" action="{!buyMore}" onclick="window.location.reload();" styleClass="btn btn-outline-danger btn-lg btn-block"/>
+                    </div>                    
+                </apex:form>
+            </apex:pageBlock>
+        </body>
+    </html>         
+</apex:page>

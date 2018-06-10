@@ -1,0 +1,111 @@
+<apex:page controller="purchaseOrderController">
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:pageBlock title="buyProducts.com" rendered="{!showCart}">
+                <apex:form >
+                    <apex:pageBlockTable value="{!allProductInOrg}" var="vfProduct" rows="7" id="orgProducts">
+                        <apex:column >
+                            <apex:inputCheckbox value="{!vfProduct.isSelected}" id="checkBox">
+                                <apex:actionSupport event="onchange" action="{!processWithSelected}" reRender="cart,orgProducts">
+                                    <apex:param name="selectedProductId" assignTo="{!selectedProductID}" value="{!vfProduct.product.Id}"/>
+                                </apex:actionSupport>
+                            </apex:inputCheckbox>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">
+                                Name
+                            </apex:facet>
+                            <apex:outputText value="{!vfProduct.product.Name}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">
+                                Product Code
+                            </apex:facet>
+                            <apex:outputText value="{!vfProduct.product.ProductCode}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">
+                                Price
+                            </apex:facet>
+                            <apex:outputText value="{!vfProduct.product.Price__c}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">
+                                Quantity
+                            </apex:facet>
+                            <apex:outputText value="{!vfProduct.product.Quantity__c}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:form>
+            </apex:pageBlock>
+            <!--Shopping Cart-->
+            <apex:form >
+                <apex:pageBlock title="Your Cart" rendered="{!showCart}">
+                    <apex:outputPanel id="cart">
+                        <apex:pageBlockTable value="{!selectedProductList}" var="selectedProduct" rendered="{!!showCartMessage}" >
+                            <apex:column value="{!selectedProduct.product.Name}"/>
+                            <apex:column value="{!selectedProduct.product.ProductCode}"/>
+                            <apex:column value="{!selectedProduct.product.Price__c}" id="productPrice"/>
+                            <apex:column >
+                                <apex:facet name="header">
+                                    Total Quantity
+                                </apex:facet>
+                                <apex:outputField value="{!selectedProduct.MyProduct.Quantity__c}" id="newQuantity" >
+                                    <apex:inlineEditSupport event="ondblClick" showOnEdit="saveButton,cancelButton" /> 
+                                </apex:outputField>                     
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">
+                                    Amount
+                                </apex:facet>
+                                {!selectedProduct.amount}
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">
+                                    Action
+                                </apex:facet>
+                                <apex:commandLink action="{!remove}" reRender="cart,orgProducts">
+                                    <img src="/img/func_icons/remove12_on.gif"/>
+                                    <apex:param name="productId" value="{!selectedProduct.product.Id}" assignTo="{!removeProductId}"/>
+                                </apex:commandLink>
+                            </apex:column>
+                            
+                        </apex:pageBlockTable>
+                        <apex:commandButton value="Save" id="saveButton" />
+                        <apex:outputText rendered="{!!showCartMessage}">
+                            Your cart Total : <b>{!cartTotal}/-</b>&nbsp;&nbsp; 
+                            <apex:commandButton value="CheckOut" action="{!showUser}"/>
+                            <!--onclick="window.open('/apex/createUser','_blank','height=200,width=600');" -->
+                        </apex:outputText>
+                        <apex:outputText rendered="{!showCartMessage}">
+                            Your Cart is Empty. Select Product to buy.
+                        </apex:outputText>
+                    </apex:outputPanel>
+                </apex:pageBlock>
+            </apex:form>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <!--user data-->
+    <apex:form >
+        <apex:pageBlock title="Enter UserInfo For Checkout." rendered="{!showUserForm}">
+            <apex:pageMessages />
+            <apex:pageBlockButtons location="bottom"> 
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="cancel" action="{!cancel}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:inputField required="true" value="{!userAccount.Name}"/>
+                <apex:inputField required="true" value="{!userAccount.Address__c}"/>
+                <apex:inputField required="true" value="{!userAccount.Email__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:pageBlock title="Thank you" rendered="{!orderPurchased}">
+        <apex:form >
+            Thank you for shopping with us your order will be deliver soon. We will notify you with E-mail.
+            <apex:commandButton action="/{!userAccount.Id}" value="View Purchased"/>
+            <apex:commandButton value="Buy More" action="{!buyMore}" onclick="window.location.reload();"/>
+        </apex:form>
+    </apex:pageBlock>
+    
+</apex:page>

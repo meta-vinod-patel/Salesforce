@@ -1,0 +1,104 @@
+[
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad7F000001W4EGSA0"
+        },
+        "Id": "0Ad7F000001W4EGSA0",
+        "AuraDefinitionBundleId": "0Ab7F000000VYdNSAW",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab7F000000VYdNSAW"
+            },
+            "DeveloperName": "SpeakerForm"
+        },
+        "DefType": "CONTROLLER",
+        "Format": "JS"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad7F000001W4EBSA0"
+        },
+        "Id": "0Ad7F000001W4EBSA0",
+        "AuraDefinitionBundleId": "0Ab7F000000VYdNSAW",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab7F000000VYdNSAW"
+            },
+            "DeveloperName": "SpeakerForm"
+        },
+        "DefType": "COMPONENT",
+        "Format": "XML"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad7F000001W4EaSAK"
+        },
+        "Id": "0Ad7F000001W4EaSAK",
+        "AuraDefinitionBundleId": "0Ab7F000000VYdrSAG",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab7F000000VYdrSAG"
+            },
+            "DeveloperName": "ImageUploader"
+        },
+        "DefType": "COMPONENT",
+        "Format": "XML"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad7F000001W4EkSAK"
+        },
+        "Id": "0Ad7F000001W4EkSAK",
+        "AuraDefinitionBundleId": "0Ab7F000000VYdrSAG",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab7F000000VYdrSAG"
+            },
+            "DeveloperName": "ImageUploader"
+        },
+        "DefType": "CONTROLLER",
+        "Format": "JS"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad7F000001WFUISA4"
+        },
+        "Id": "0Ad7F000001WFUISA4",
+        "AuraDefinitionBundleId": "0Ab7F000000VcmFSAS",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab7F000000VcmFSAS"
+            },
+            "DeveloperName": "helloWorld"
+        },
+        "DefType": "COMPONENT",
+        "Format": "XML"
+    },
+    {
+        "attributes": {
+            "type": "AuraDefinition",
+            "url": "/services/data/v36.0/tooling/sobjects/AuraDefinition/0Ad7F000001WFUNSA4"
+        },
+        "Id": "0Ad7F000001WFUNSA4",
+        "AuraDefinitionBundleId": "0Ab7F000000VcmKSAS",
+        "AuraDefinitionBundle": {
+            "attributes": {
+                "type": "AuraDefinitionBundle",
+                "url": "/services/data/v36.0/tooling/sobjects/AuraDefinitionBundle/0Ab7F000000VcmKSAS"
+            },
+            "DeveloperName": "harnessApp"
+        },
+        "DefType": "APPLICATION",
+        "Format": "XML"
+    }
+]
