@@ -1,12 +1,12 @@
 {
-    "projectName": "SalesforceProject",
+    "projectName": "ProjectSalesforce",
     "username": "vinod@metacube.com",
-    "id": "1928a500-6cb3-11e8-8db9-f1f7b5b75203",
+    "id": "25941480-6d46-11e8-abdb-ed2ffa53e95f",
     "namespace": "",
     "orgType": "developer",
     "loginUrl": "https://login.salesforce.com/",
     "instanceUrl": "https://ap5.salesforce.com",
-    "workspace": "C:\\Users\\Ideapad 320\\Documents\\Salesforce",
+    "workspace": "D:\\Salesforce",
     "subscription": [
         "ApexClass",
         "ApexComponent",

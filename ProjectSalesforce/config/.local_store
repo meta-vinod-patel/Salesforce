@@ -28,17 +28,15 @@
         "mmState": "clean"
     },
     "Shopify.page": {
-        "id": "0667F00000918acQAA",
-        "name": "Shopify",
-        "createdDate": "2018-05-26T13:07:48.000+0000",
         "createdById": "0057F000003RgZuQAK",
-        "namespacePrefix": null,
-        "lastModifiedById": "0057F000003RgZuQAK",
-        "lastModifiedDate": "2018-06-10T13:41:13.000+0000",
-        "fullName": "Shopify",
-        "fileName": "unpackaged/pages/Shopify.page",
         "createdByName": "Vinod Patel",
+        "createdDate": "2018-05-26T13:07:48.000Z",
+        "fileName": "unpackaged/pages/Shopify.page",
+        "fullName": "Shopify",
+        "id": "0667F00000918acQAA",
+        "lastModifiedById": "0057F000003RgZuQAK",
         "lastModifiedByName": "Vinod Patel",
+        "lastModifiedDate": "2018-06-10T13:41:13.000Z",
         "manageableState": "unmanaged",
         "type": "ApexPage",
         "mmState": "clean"
@@ -192,7 +190,7 @@
         "id": "01p7F00000TMICMQA5",
         "lastModifiedById": "0057F000003RgZuQAK",
         "lastModifiedByName": "Vinod Patel",
-        "lastModifiedDate": "2018-06-09T17:16:09.000Z",
+        "lastModifiedDate": "2018-06-10T13:59:05.000Z",
         "manageableState": "unmanaged",
         "type": "ApexClass",
         "mmState": "clean"
